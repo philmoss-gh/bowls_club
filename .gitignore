@@ -1,0 +1,33 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+d_env/
+env/
+venv/
+
+# Django database
+db.sqlite3
+
+# Logs
+*.log
+
+# Static and media files (if generated)
+staticfiles/
+media/
+
+# VS Code settings
+.vscode/
+
+# macOS and Windows system files
+.DS_Store
+Thumbs.db
+
+# Python egg files
+*.egg-info/
+*.egg
+
+manage.zip
