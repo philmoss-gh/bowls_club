@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crosshands and District Community Bowls Club</title>
+</head>
+<body>
+    <header>
+        <h1>Crosshands and District Community Bowls Club</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'players' %}">Players</a></li>
+                <li><a href="{% url 'competitions' %}">Competitions</a></li>
+                <li><a href="{% url 'sponsors' %}">Sponsors</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}
+        <!-- Content from child templates will be inserted here -->
+        {% endblock %}
+    </main>
+</body>
+</html>

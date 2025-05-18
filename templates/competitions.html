@@ -1,0 +1,21 @@
+<!-- filepath: c:\Users\Phil\Desktop\Dev\templates\competitions.html -->
+{% extends "master.html" %}
+
+{% block title %}
+Competitions - Crosshands and District Community Bowls Club
+{% endblock %}
+
+{% block content %}
+<h2>Competitions</h2>
+<p>We are competing in these competitions this season:</p>
+<ul>
+    {% for competition in competitions %}
+        <li>
+            {{ competition.name }} - 
+            <a href="{% url 'fixtures_results' competition.id %}">Fixtures and Results</a>
+        </li>
+    {% empty %}
+        <li>No competitions available at the moment.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

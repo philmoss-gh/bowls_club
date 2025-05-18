@@ -1,0 +1,33 @@
+<!-- filepath: c:\Users\Phil\Desktop\Dev\templates\fixtures_results.html -->
+{% extends "master.html" %}
+
+{% block title %}
+Fixtures and Results - {{ competition.name }}
+{% endblock %}
+
+{% block content %}
+<h2>Fixtures and Results for {{ competition.name }}</h2>
+
+{% if matches %}
+    <ul>
+        {% for match in matches %}
+            <li>
+                {{ match.date|date:"D, M d, Y H:i" }} - 
+                {% if match.home_or_away == "Home" %}
+                    Crosshands vs {{ match.opposition_team.name }}
+                    {% if match.crosshands_score is not None and match.opposition_score is not None %}
+                        ({{ match.crosshands_score }} - {{ match.opposition_score }})
+                    {% endif %}
+                {% else %}
+                    {{ match.opposition_team.name }} vs Crosshands
+                    {% if match.crosshands_score is not None and match.opposition_score is not None %}
+                        ({{ match.opposition_score }} - {{ match.crosshands_score }})
+                    {% endif %}
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No matches available for this competition.</p>
+{% endif %}
+{% endblock %}
