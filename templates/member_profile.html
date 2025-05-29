@@ -1,0 +1,22 @@
+<!-- filepath: c:\Users\Phil\Desktop\Dev\templates\member_profile.html -->
+{% extends "master.html" %}
+
+{% block title %}
+{{ member.first_name }} {{ member.last_name }} - Profile
+{% endblock %}
+
+{% block content %}
+<div class="member-profile-container">
+    <h2>{{ member.first_name }} {{ member.last_name }}</h2>
+    {% if member.profile_image %}
+        <img src="{{ member.profile_image.url }}" alt="{{ member.first_name }} {{ member.last_name }}" class="member-profile-image">
+    {% endif %}
+    <p><strong>Team:</strong> {{ member.team }}</p>
+    <p><strong>Role:</strong> {{ member.role }}</p>
+    {% if member.profile_text %}
+        <div class="member-profile-text">
+            {{ member.profile_text|linebreaks }}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

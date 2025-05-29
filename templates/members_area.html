@@ -1,0 +1,17 @@
+<!-- filepath: c:\Users\Phil\Desktop\Dev\templates\members_area.html -->
+{% extends "master.html" %}
+{% block title %}Members Area{% endblock %}
+{% block content %}
+<h2>Members Area</h2>
+<p>Welcome, {{ user.get_full_name|default:user.username }}!</p>
+<ul>
+  <li><a href="{% url 'password_change' %}">Change password</a></li>
+  <li>
+    <form method="post" action="{% url 'logout' %}" style="display:inline;">
+      {% csrf_token %}
+      <button type="submit" style="background:none;border:none;padding:0;color:#388e3c;cursor:pointer;font:inherit;text-decoration:underline;">Logout</button>
+    </form>
+  </li>
+</ul>
+<p>This area is only visible to logged-in members.</p>
+{% endblock %}

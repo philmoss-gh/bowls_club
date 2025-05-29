@@ -1,5 +1,6 @@
 <!-- filepath: c:\Users\Phil\Desktop\Dev\templates\competitions.html -->
 {% extends "master.html" %}
+{% load static %}
 
 {% block title %}
 Competitions - Crosshands and District Community Bowls Club
@@ -7,15 +8,20 @@ Competitions - Crosshands and District Community Bowls Club
 
 {% block content %}
 <h2>Competitions</h2>
-<p>We are competing in these competitions this season:</p>
-<ul>
-    {% for competition in competitions %}
-        <li>
-            {{ competition.name }} - 
-            <a href="{% url 'fixtures_results' competition.id %}">Fixtures and Results</a>
-        </li>
-    {% empty %}
-        <li>No competitions available at the moment.</li>
-    {% endfor %}
-</ul>
+<div class="competitions-tiles">
+  {% for competition in competitions %}
+    <div class="competition-tile">
+      <h3>{{ competition.name }}</h3>
+      {% if competition.competition_type %}
+        <div class="competition-type">{{ competition.competition_type }}</div>
+      {% endif %}
+      {% if competition.description %}
+        <div class="competition-desc">{{ competition.description }}</div>
+      {% endif %}
+      <a href="{% url 'fixtures_results' competition.id %}" class="competition-link">View Fixtures & Results</a>
+    </div>
+  {% empty %}
+    <p>No competitions found.</p>
+  {% endfor %}
+</div>
 {% endblock %}

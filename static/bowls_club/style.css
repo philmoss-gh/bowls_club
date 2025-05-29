@@ -1,0 +1,460 @@
+/* Green-themed, eye-catching header and nav */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f4fff4;
+    color: #222;
+}
+
+/* Header bar styling */
+header {
+    background: linear-gradient(90deg, #388e3c 0%, #43a047 100%);
+    color: #fff;
+    padding: 24px 0 12px 0;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(56, 142, 60, 0.15);
+}
+header h1 {
+    margin: 0 0 14px 0;
+    font-size: 2.2rem;
+    letter-spacing: 2px;
+    font-weight: 700;
+    text-shadow: 1px 2px 8px rgba(34, 139, 34, 0.15);
+}
+
+/* Horizontal nav bar styling */
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(90deg, #102415 0%, #1b2e1b 100%);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(56, 142, 60, 0.08);
+    overflow: hidden;
+}
+nav ul li {
+    margin: 0;
+}
+nav ul li a {
+    display: block;
+    padding: 14px 32px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    border-right: 1px solid #43a047;
+}
+nav ul li:last-child a {
+    border-right: none;
+}
+nav ul li a:hover,
+nav ul li a:focus {
+    background: #a5d6a7;
+    color: #1b5e20;
+    box-shadow: 0 2px 12px rgba(56, 142, 60, 0.15);
+}
+nav ul li a.admin-link {
+    background: #fffde7;
+    color: #388e3c;
+    font-weight: 600;
+    border-right: none;
+    border-left: 1px solid #43a047;
+}
+nav ul li a.admin-link:hover,
+nav ul li a.admin-link:focus {
+    background: #ffe082;
+    color: #1b5e20;
+    box-shadow: 0 2px 12px rgba(56, 142, 60, 0.15);
+}
+
+main {
+    padding: 32px 16px;
+    max-width: 1300px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 24px rgba(56, 142, 60, 0.07);
+    margin-top: 32px;
+}
+
+/* Members table styling */
+.members-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 24px;
+    background: #f9fff9;
+}
+.members-table th, .members-table td {
+    border: 1px solid #b2dfdb;
+    padding: 10px 14px;
+    text-align: left;
+}
+.members-table th {
+    background: #388e3c;
+    color: #fff;
+}
+.members-table tr:nth-child(even) {
+    background: #e8f5e9;
+}
+.role-badge {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 2px 8px;
+    background: #ffe082;
+    color: #388e3c;
+    border-radius: 8px;
+    font-size: 0.95em;
+    font-weight: 600;
+}
+/* Add to: c:\Users\Phil\Desktop\Dev\static\bowls_club\style.css */
+
+.members-tiles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 32px;
+}
+
+.member-tile {
+    background: #e8f5e9;
+    border: 2px solid #388e3c;
+    border-radius: 12px;
+    padding: 12px 0px;
+    padding-top: 0;
+    width: 180px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 8px rgba(56, 142, 60, 0.10);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #222;
+    position: relative;
+}
+
+.role-header {
+    width: 100%;
+    text-align: center;
+    background: #ffe082;
+    color: #388e3c;
+    border-radius: 8px 8px 0 0;
+    font-size: 1.08em;
+    font-weight: 700;
+    padding: 2px 0 2px 0;
+    margin-bottom: 5px;
+    margin-top: 0;           /* Add this line to remove space above */
+    letter-spacing: 1px;
+    box-shadow: 0 1px 4px rgba(56, 142, 60, 0.07);
+}
+.captain-tile .role-header {
+    background: #388e3c;
+    color: #fff;
+}
+.vice-tile .role-header {
+    background: #a5d6a7;
+    color: #222;
+}
+.member-profile-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 8px rgba(56, 142, 60, 0.10);
+    transition: width 0.3s ease, height 0.3s ease, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.member-profile-image:hover {
+    width: 300px;
+    height: 300px;
+    box-shadow: 0 8px 32px rgba(56, 142, 60, 0.18);
+    z-index: 10;
+}
+
+/* Sponsors section styling */
+.sponsors-tiles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three tiles per row */
+    gap: 20px; /* Reduced gap between tiles */
+    margin-top: 24px;
+    margin-bottom: 32px;
+}
+
+.sponsor-tile-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    flex: 1 1 240px;
+    min-width: 240px;
+    max-width: 300px;
+}
+
+.sponsor-tile {
+    background: #f1f8e9;
+    border: 2px solid #388e3c;
+    border-radius: 12px;
+    padding: 18px 24px;
+    width: 100%;
+   width: 400px;      /* Make tiles wider */
+    max-width: 450px;      /* Optional: limit max width */
+       /* Make tiles less high */
+    height: 300px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 8px rgba(56, 142, 60, 0.10);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: flex-start;
+}
+
+.sponsor-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    margin-bottom: 10px;
+    gap: 4px;
+    padding: 0;
+}
+
+.sponsor-image {
+    width: 300px;
+    height: 100px;
+    object-fit: contain;
+    border-radius: 0;      /* Remove rounded corners */
+    background: none;      /* Remove background */
+    margin: 0;
+    display: block;
+    padding: 0;
+    box-shadow: none;
+    border: none;          /* Remove any border */
+}
+
+.sponsor-name {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #222;
+    margin: 0;
+    text-align: center;
+}
+
+.sponsor-profile {
+    font-size: 1rem;
+    color: #333;
+    margin-top: 10px;
+}
+
+/* Fixtures & Results Table Styling */
+.fixtures-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 1.05em;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(56, 142, 60, 0.06);
+}
+.fixtures-table th, .fixtures-table td {
+  border: 1px solid #e0e0e0;
+  padding: 10px 14px;
+  text-align: left;
+}
+.fixtures-table th {
+  background: #388e3c;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+.fixtures-table tr:nth-child(even) {
+  background: #f6f6f6;
+}
+.fixtures-table tr:hover {
+  background: #e8f5e9;
+  transition: background 0.2s;
+}
+.fixtures-table td {
+  vertical-align: middle;
+}
+.fixtures-table .score-cell {
+  font-weight: bold;
+  color: #388e3c;
+}
+.fixtures-table .no-score {
+  color: #aaa;
+  font-style: italic;
+}
+.filter-form {
+  margin-bottom: 24px;
+  padding: 12px 18px;
+  background: #f1f8e9;
+  border-radius: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+}
+.filter-form label {
+  font-weight: 500;
+  margin-right: 6px;
+}
+.filter-form select, .filter-form button {
+  padding: 5px 10px;
+  border-radius: 4px;
+  border: 1px solid #bdbdbd;
+  font-size: 1em;
+}
+.filter-form button {
+  background: #388e3c;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.filter-form button:hover {
+  background: #2e7031;
+}
+.scored-match {
+  background: #ffebee !important;
+  color: #b71c1c !important;
+  font-weight: bold;
+}
+.match-won {
+  background: #e8f5e9 !important;
+  color: #388e3c !important;
+  font-weight: bold;
+}
+.match-lost {
+  background: #ffebee !important;
+  color: #b71c1c !important;
+  font-weight: bold;
+}
+.competitions-tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 24px;
+  margin-bottom: 32px;
+}
+.competition-tile {
+  background: #e8f5e9;
+  border: 2px solid #388e3c;
+  border-radius: 12px;
+  padding: 12px 0px;
+  width: 180px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 8px rgba(56, 142, 60, 0.10);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #222;
+  position: relative;
+  min-height: 140px;
+}
+
+.competition-tile h3 {
+    margin: 10px 0 6px 0;
+    font-size: 1.15rem;
+    color: #388e3c;
+    font-weight: 700;
+    text-align: center;
+}
+
+.competition-type {
+    width: 100%;
+    text-align: center;
+    background: #ffe082;
+    color: #388e3c;
+    border-radius: 8px 8px 0 0;
+    font-size: 1.08em;
+    font-weight: 700;
+    padding: 2px 0 2px 0;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+    box-shadow: 0 1px 4px rgba(56, 142, 60, 0.07);
+}
+
+.competition-desc {
+    font-size: 0.98em;
+    color: #444;
+    margin-bottom: 10px;
+    text-align: center;
+    padding: 0 8px;
+}
+
+.competition-link {
+    margin-top: auto;
+    background: #388e3c;
+    color: #fff;
+    padding: 7px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.2s;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+.competition-link:hover {
+    background: #2e7031;
+}
+
+/* Contact Form Styling */
+.contact-form {
+  max-width: 400px;
+  margin: 32px auto;
+  background: #f1f8e9;
+  padding: 24px 28px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(56, 142, 60, 0.10);
+}
+.contact-form label {
+  font-weight: 600;
+}
+.contact-form input, .contact-form textarea {
+  width: 100%;
+  padding: 8px 10px;
+  margin-bottom: 16px;
+  border-radius: 5px;
+  border: 1px solid #bdbdbd;
+  font-size: 1em;
+}
+.contact-form button {
+  background: #388e3c;
+  color: #fff;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.contact-form button:hover {
+  background: #2e7031;
+}
+.success-message {
+  background: #e8f5e9;
+  color: #388e3c;
+  padding: 18px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 1.1em;
+  margin: 32px auto;
+  max-width: 400px;
+  box-shadow: 0 2px 8px rgba(56, 142, 60, 0.10);
+}
+
+/* Add to your style.css */
+.available-status {
+  margin-left: 10px;
+  color: #388e3c;
+  font-weight: bold;
+}

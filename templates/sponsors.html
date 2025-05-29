@@ -1,11 +1,34 @@
-<!-- filepath: c:\Users\Phil\Desktop\Dev\templates\home.html -->
+<!-- filepath: c:\Users\Phil\Desktop\Dev\templates\sponsors.html -->
 {% extends "master.html" %}
 
 {% block title %}
-Home - Crosshands and District Community Bowls Club
+Sponsors - Crosshands and District Community Bowls Club
 {% endblock %}
 
 {% block content %}
+<h2>Meet our sponsors!</h2>
+<p>We are grateful for the support of our sponsors who help make our club activities possible.</p>
 
-<p>Meet our sponsors!</p>
+{% if sponsors %}
+    <p>Click on a tile to visit their website.</p>
+    <div class="sponsors-tiles">
+        {% for sponsor in sponsors %}
+            <a href="{{ sponsor.website }}" target="_blank" rel="noopener" class="sponsor-tile-link">
+                <div class="sponsor-tile">
+                    <div class="sponsor-header">
+                        {% if sponsor.image %}
+                            <img src="{{ sponsor.image.url }}" alt="{{ sponsor.name }}" class="sponsor-image">
+                        {% endif %}
+                        <div class="sponsor-name">{{ sponsor.name }}</div>
+                    </div>
+                    {% if sponsor.profile %}
+                        <div class="sponsor-profile">{{ sponsor.profile|linebreaks }}</div>
+                    {% endif %}
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No sponsors available at the moment.</p>
+{% endif %}
 {% endblock %}

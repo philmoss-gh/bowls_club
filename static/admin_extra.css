@@ -1,0 +1,6 @@
+.selector-chosen select option:checked,
+.selector select option:checked,
+select[multiple] option:checked {
+    background: #1976d2 !important; /* Blue */
+    color: #fff !important;
+}

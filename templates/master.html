@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crosshands and District Community Bowls Club</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bowls_club/style.css' %}">
 </head>
 <body>
     <header>
@@ -14,6 +16,9 @@
                 <li><a href="{% url 'players' %}">Players</a></li>
                 <li><a href="{% url 'competitions' %}">Competitions</a></li>
                 <li><a href="{% url 'sponsors' %}">Sponsors</a></li>
+                <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                <li><a href="{% url 'members_area' %}">Members Area</a></li>
+                <li><a href="{% url 'admin:login' %}">Admin Login</a></li>
             </ul>
         </nav>
     </header>

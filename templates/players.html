@@ -1,11 +1,56 @@
-<!-- filepath: c:\Users\Phil\Desktop\Dev\templates\home.html -->
+<!-- filepath: c:\Users\Phil\Desktop\Dev\templates\players.html -->
 {% extends "master.html" %}
 
 {% block title %}
-Home - Crosshands and District Community Bowls Club
+Players - Crosshands and District Community Bowls Club
 {% endblock %}
 
 {% block content %}
+<h2>Meet Our Members!</h2>
 
-<p>Meet the players!</p>
+{% for team in teams %}
+    {% if team == "Socialites" %}
+        <h3>Social members</h3>
+    {% else %}
+        <h3>{{ team }} Team</h3>
+    {% endif %}
+    <div class="members-tiles">
+        {# Captain #}
+        {% for member in members %}
+            {% if member.team == team and member.role == "Captain" %}
+                <div class="member-tile captain-tile">
+                    <div class="role-header">Captain</div>
+                    <a href="{% url 'member_profile' member.id %}" class="member-name-link">
+                        <span class="member-name">{{ member.first_name }} {{ member.last_name }}</span>
+                    </a>
+                </div>
+            {% endif %}
+        {% endfor %}
+        {# Vice-Captain #}
+        {% for member in members %}
+            {% if member.team == team and member.role == "Vice-Captain" %}
+                <div class="member-tile vice-tile">
+                    <div class="role-header">Vice-Captain</div>
+                    <a href="{% url 'member_profile' member.id %}" class="member-name-link">
+                        <span class="member-name">{{ member.first_name }} {{ member.last_name }}</span>
+                    </a>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div class="members-tiles">
+        {# All other members #}
+        {% for member in members %}
+            {% if member.team == team and member.role != "Captain" and member.role != "Vice-Captain" %}
+                <div class="member-tile">
+                    <a href="{% url 'member_profile' member.id %}" class="member-name-link">
+                        <span class="member-name">{{ member.first_name }} {{ member.last_name }}</span>
+                    </a>
+                </div>
+            {% endif %}
+        {% empty %}
+            <div>No members found.</div>
+        {% endfor %}
+    </div>
+{% endfor %}
 {% endblock %}

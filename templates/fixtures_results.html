@@ -1,6 +1,6 @@
 <!-- filepath: c:\Users\Phil\Desktop\Dev\templates\fixtures_results.html -->
 {% extends "master.html" %}
-
+{% load static %}
 {% block title %}
 Fixtures and Results - {{ competition.name }}
 {% endblock %}
@@ -8,26 +8,164 @@ Fixtures and Results - {{ competition.name }}
 {% block content %}
 <h2>Fixtures and Results for {{ competition.name }}</h2>
 
-{% if matches %}
-    <ul>
-        {% for match in matches %}
-            <li>
-                {{ match.date|date:"D, M d, Y H:i" }} - 
-                {% if match.home_or_away == "Home" %}
-                    Crosshands vs {{ match.opposition_team.name }}
-                    {% if match.crosshands_score is not None and match.opposition_score is not None %}
-                        ({{ match.crosshands_score }} - {{ match.opposition_score }})
-                    {% endif %}
-                {% else %}
-                    {{ match.opposition_team.name }} vs Crosshands
-                    {% if match.crosshands_score is not None and match.opposition_score is not None %}
-                        ({{ match.opposition_score }} - {{ match.crosshands_score }})
-                    {% endif %}
-                {% endif %}
-            </li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p>No matches available for this competition.</p>
-{% endif %}
+<form method="get" class="filter-form">
+  <label for="year">Year:</label>
+  <select name="year" id="year">
+    <option value="">All</option>
+    {% for y in years %}
+      <option value="{{ y.year }}" {% if y.year|stringformat:"s" == selected_year %}selected{% endif %}>{{ y.year }}</option>
+    {% endfor %}
+  </select>
+  <button type="submit">Filter</button>
+</form>
+
+<table class="fixtures-table">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Opposition</th>
+      <th>Home/Away</th>
+      <th>Score</th>
+      <th>Competition</th>
+      {% if user.is_authenticated %}
+        <th>Availability</th>
+      {% endif %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for match in matches %}
+      {% if match.our_score is not None and match.their_score is not None %}
+        {% if match.our_score > match.their_score %}
+          <tr class="match-won">
+        {% else %}
+          <tr class="match-lost">
+        {% endif %}
+      {% else %}
+        <tr>
+      {% endif %}
+        <td>{{ match.date|date:"d F Y" }}</td>
+        <td>{{ match.opposition }}</td>
+        <td>{{ match.home_or_away }}</td>
+        <td>
+          {% if match.our_score is not None and match.their_score is not None %}
+            {% if match.home_or_away == "Home" %}
+              {{ match.our_score }} - {{ match.their_score }}
+            {% else %}
+              {{ match.their_score }} - {{ match.our_score }}
+            {% endif %}
+          {% else %}
+            -
+          {% endif %}
+        </td>
+        <td>{{ match.competition_name }}</td>
+        {% if user.is_authenticated %}
+          <td>
+            <form method="post" action="{% url 'update_availability' match_id=match.id %}" class="availability-form">
+              {% csrf_token %}
+              <input type="hidden" name="availability" value="">
+              <button type="submit" class="availability-btn">Update Availability</button>
+              {% if match.available %}
+                <span class="available-status">Available</span>
+              {% endif %}
+            </form>
+          </td>
+        {% endif %}
+      </tr>
+    {% empty %}
+      <tr><td colspan="6">No matches found.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.availability-form').forEach(function(form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      // Create custom dialog
+      let dialog = document.createElement('div');
+      dialog.style.position = 'fixed';
+      dialog.style.left = 0;
+      dialog.style.top = 0;
+      dialog.style.width = '100vw';
+      dialog.style.height = '100vh';
+      dialog.style.background = 'rgba(0,0,0,0.3)';
+      dialog.style.display = 'flex';
+      dialog.style.alignItems = 'center';
+      dialog.style.justifyContent = 'center';
+      dialog.style.zIndex = 10000;
+
+      let box = document.createElement('div');
+      box.style.background = '#fff';
+      box.style.padding = '24px 32px';
+      box.style.borderRadius = '10px';
+      box.style.boxShadow = '0 2px 12px rgba(0,0,0,0.15)';
+      box.style.textAlign = 'center';
+
+      let msg = document.createElement('div');
+      msg.textContent = 'Are you available to play in this match?';
+      msg.style.marginBottom = '18px';
+      box.appendChild(msg);
+
+      let yesBtn = document.createElement('button');
+      yesBtn.textContent = 'Yes';
+      yesBtn.style.margin = '0 10px';
+      yesBtn.style.background = '#388e3c';
+      yesBtn.style.color = '#fff';
+      yesBtn.style.border = 'none';
+      yesBtn.style.padding = '8px 18px';
+      yesBtn.style.borderRadius = '6px';
+      yesBtn.style.fontWeight = '600';
+      yesBtn.onclick = function() {
+        form.querySelector('input[name="availability"]').value = "yes";
+        // Show "Available" instantly
+        let status = form.querySelector('.available-status');
+        if (!status) {
+          status = document.createElement('span');
+          status.className = 'available-status';
+          status.textContent = 'Available';
+          status.style.marginLeft = '10px';
+          status.style.color = '#388e3c';
+          form.appendChild(status);
+        }
+        form.submit();
+        document.body.removeChild(dialog);
+      };
+
+      let noBtn = document.createElement('button');
+      noBtn.textContent = 'No';
+      noBtn.style.margin = '0 10px';
+      noBtn.style.background = '#b71c1c';
+      noBtn.style.color = '#fff';
+      noBtn.style.border = 'none';
+      noBtn.style.padding = '8px 18px';
+      noBtn.style.borderRadius = '6px';
+      noBtn.style.fontWeight = '600';
+      noBtn.onclick = function() {
+        // Optionally, set a hidden input for "no"
+        form.submit();
+        document.body.removeChild(dialog);
+      };
+
+      let cancelBtn = document.createElement('button');
+      cancelBtn.textContent = 'Cancel';
+      cancelBtn.style.margin = '0 10px';
+      cancelBtn.style.background = '#aaa';
+      cancelBtn.style.color = '#fff';
+      cancelBtn.style.border = 'none';
+      cancelBtn.style.padding = '8px 18px';
+      cancelBtn.style.borderRadius = '6px';
+      cancelBtn.onclick = function() {
+        document.body.removeChild(dialog);
+      };
+
+      box.appendChild(yesBtn);
+      box.appendChild(noBtn);
+      box.appendChild(cancelBtn);
+      dialog.appendChild(box);
+      document.body.appendChild(dialog);
+    });
+  });
+});
+</script>
 {% endblock %}
